@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Доступные растения</h2>
+<div class="row">
+    {% for p in plants %}
+    <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm">
+            <img src="/static/uploads/{{p.image_name}}" class="card-img-top" style="height:150px; object-fit:cover;">
+            <div class="card-body">
+                <h5>{{p.title}}</h5>
+                <p class="small text-muted">{{p.description}}</p>
+                <p class="small">👤 От: {{p.author}}</p>
+                {% if session.username == p.author %}
+                    <span class="badge bg-secondary w-100">Ваше фото</span>
+                {% else %}
+                    <a href="/take/{{p.id}}" class="btn btn-success btn-sm w-100">Забрать</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
